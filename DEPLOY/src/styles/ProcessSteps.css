@@ -1,0 +1,152 @@
+.process-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 2rem 0;
+    padding: 0 1rem;
+    color: var(--text-color);
+}
+
+.steps-container {
+    padding: 1rem;
+}
+
+.step-card {
+    background: var(--background-color);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.step-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.step-description {
+    color: #666;
+    line-height: 1.6;
+}
+
+.value-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 70px; /* Espace pour la navigation du bas */
+}
+
+.value-button {
+    background: var(--background-color);
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.value-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.value-button:active {
+    transform: translateY(0);
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--background-color);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 4px var(--shadow-color);
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.nav-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.add-button {
+    background: var(--primary-color);
+    border-radius: 50%;
+    padding: 1rem;
+    margin-top: -2rem;
+}
+
+.add-button img {
+    filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+    .process-title {
+        font-size: 1.25rem;
+        margin: 1rem 0;
+    }
+
+    .step-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+    }
+
+    .step-title {
+        font-size: 1.1rem;
+    }
+
+    .value-buttons {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .value-button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .nav-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .add-button {
+        padding: 0.75rem;
+        margin-top: -1.5rem;
+    }
+} 
