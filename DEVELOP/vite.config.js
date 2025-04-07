@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/vcube-website/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -17,6 +18,6 @@ export default defineConfig({
     sourcemap: false
   },
   define: {
-    __API_URL__: JSON.stringify('/api.php?action=contact')
+    __API_URL__: JSON.stringify('https://ateliervcube.be/server/process-contact.php')
   }
 }) 

@@ -8,6 +8,8 @@ const ContactCTA = () => {
         email: '',
         message: ''
     });
+    const [status, setStatus] = useState('');
+    const [statusMessage, setStatusMessage] = useState('');
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,7 +17,52 @@ const ContactCTA = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Formulaire soumis:', formData);
+        console.log('Début de la soumission du formulaire');
+        setStatus('sending');
+        setStatusMessage('');
+
+        try {
+            const apiUrl = 'https://ateliervcube.be/server/process-contact.php';
+            console.log('URL de l\'API:', apiUrl);
+            console.log('Données du formulaire:', formData);
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            console.log('Statut de la réponse:', response.status);
+            console.log('Headers de la réponse:', response.headers);
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erreur de réponse:', errorText);
+                throw new Error(`Erreur HTTP: ${response.status} - ${errorText}`);
+            }
+
+            const data = await response.json();
+            console.log('Réponse du serveur:', data);
+            
+            if (data.success) {
+                setStatus('success');
+                setFormData({ name: '', email: '', message: '' });
+                setStatusMessage(data.message || 'Votre message a été envoyé avec succès !');
+                setTimeout(() => {
+                    handleClose();
+                }, 3000);
+            } else {
+                throw new Error(data.message || 'Erreur lors de l\'envoi du message');
+            }
+        } catch (error) {
+            console.error('Erreur complète:', error);
+            setStatus('error');
+            setStatusMessage(error.message || 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.');
+        }
     };
 
     const handleContactClick = () => {
@@ -30,6 +77,8 @@ const ContactCTA = () => {
         setTimeout(() => {
             setIsExpanded(false);
             setFormData({ name: '', email: '', message: '' });
+            setStatus('');
+            setStatusMessage('');
         }, 500);
     };
 
@@ -113,13 +162,27 @@ const ContactCTA = () => {
                                 />
                             </div>
 
+                            {status && (
+                                <div className={`transform transition-all duration-500 ${
+                                    status === 'success' 
+                                        ? 'bg-green-500/20 text-green-100' 
+                                        : status === 'error' 
+                                            ? 'bg-red-500/20 text-red-100'
+                                            : 'bg-white/10 text-white'
+                                } rounded-xl px-6 py-4`}>
+                                    {statusMessage}
+                                </div>
+                            )}
+
                             <div className={`transform transition-all duration-500 delay-300 ${showForm ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
                                 <button
                                     type="submit"
-                                    className="bg-white text-[#3CA6A6] px-8 py-4 rounded-xl font-semibold text-lg 
-                                        shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                    disabled={status === 'sending'}
+                                    className={`bg-white text-[#3CA6A6] px-8 py-4 rounded-xl font-semibold text-lg 
+                                        shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1
+                                        ${status === 'sending' ? 'opacity-75 cursor-not-allowed' : ''}`}
                                 >
-                                    Envoyer
+                                    {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
                                 </button>
                             </div>
                         </form>
