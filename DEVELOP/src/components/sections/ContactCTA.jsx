@@ -22,8 +22,7 @@ const ContactCTA = () => {
         setStatusMessage('');
 
         try {
-            // URL absolue du serveur de production
-            const apiUrl = 'https://www.ateliervcube.be/process-contact.php';
+            const apiUrl = 'https://ateliervcube.be/process-contact.php';
             console.log('Tentative d\'envoi à:', apiUrl);
             
             const formDataToSend = {

@@ -65,9 +65,10 @@ $email_content .= "Email: $email\n\n";
 $email_content .= "Message:\n$message\n";
 
 // En-têtes de l'email
-$headers = 'From: ' . $email . "\r\n" .
-          'Reply-To: ' . $email . "\r\n" .
-          'X-Mailer: PHP/' . phpversion();
+$headers = "From: $email\r\n";
+$headers .= "Reply-To: $email\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+$headers .= "X-Mailer: PHP/" . phpversion();
 
 // Envoyer l'email
 try {
