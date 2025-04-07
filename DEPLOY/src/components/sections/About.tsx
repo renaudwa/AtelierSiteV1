@@ -29,7 +29,7 @@ const About = () => {
             <div className="bg-white p-8 md:p-10 rounded-xl shadow-lg">
               <div className="flex items-center justify-center">
                 <img 
-                  src="/images/logo-square.png" 
+                  src="/images/logo.svg" 
                   alt="VCube Logo" 
                   className="w-40 h-40 object-contain"
                 />
