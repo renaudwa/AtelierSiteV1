@@ -22,11 +22,17 @@ const ContactCTA = () => {
         setStatusMessage('');
 
         try {
-            // En production, on utilise toujours l'URL de production
-            const apiUrl = 'https://ateliervcube.be/server/process-contact.php';
+            // URL absolue du serveur de production
+            const apiUrl = 'https://www.ateliervcube.be/process-contact.php';
+            console.log('Tentative d\'envoi à:', apiUrl);
             
-            console.log('URL de l\'API:', apiUrl);
-            console.log('Données du formulaire:', formData);
+            const formDataToSend = {
+                name: formData.name,
+                email: formData.email,
+                message: formData.message
+            };
+            
+            console.log('Données à envoyer:', formDataToSend);
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -34,11 +40,10 @@ const ContactCTA = () => {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(formDataToSend)
             });
 
             console.log('Statut de la réponse:', response.status);
-            console.log('Headers de la réponse:', response.headers);
 
             if (!response.ok) {
                 const errorText = await response.text();
@@ -52,7 +57,7 @@ const ContactCTA = () => {
             if (data.success) {
                 setStatus('success');
                 setFormData({ name: '', email: '', message: '' });
-                setStatusMessage(data.message || 'Votre message a été envoyé avec succès !');
+                setStatusMessage('Message envoyé avec succès !');
                 setTimeout(() => {
                     handleClose();
                 }, 3000);
