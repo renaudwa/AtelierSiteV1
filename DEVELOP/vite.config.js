@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: '/vcube-website/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/vcube-website/' : '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -18,6 +18,10 @@ export default defineConfig({
     sourcemap: false
   },
   define: {
-    __API_URL__: JSON.stringify('https://ateliervcube.be/server/process-contact.php')
+    __API_URL__: JSON.stringify(
+      command === 'build' 
+        ? 'https://ateliervcube.be/server/process-contact.php'
+        : 'http://localhost/server/process-contact.php'
+    )
   }
-}) 
+})) 

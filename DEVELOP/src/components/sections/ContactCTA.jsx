@@ -22,7 +22,9 @@ const ContactCTA = () => {
         setStatusMessage('');
 
         try {
+            // En production, on utilise toujours l'URL de production
             const apiUrl = 'https://ateliervcube.be/server/process-contact.php';
+            
             console.log('URL de l\'API:', apiUrl);
             console.log('Données du formulaire:', formData);
             
@@ -30,8 +32,7 @@ const ContactCTA = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(formData)
             });
