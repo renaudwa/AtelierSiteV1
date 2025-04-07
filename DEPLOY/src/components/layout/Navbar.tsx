@@ -43,8 +43,8 @@ const Navbar = () => {
               }}
             >
               <img 
-                src="./images/logo.svg"
-                alt="VCube lol" 
+                src="/images/logo.svg"
+                alt="VCube Logo" 
                 className={`h-8 w-auto mr-2 ${
                   isScrolled 
                     ? '[filter:brightness(0)_saturate(100%)_invert(48%)_sepia(95%)_saturate(446%)_hue-rotate(142deg)_brightness(86%)_contrast(86%)]'
@@ -61,7 +61,7 @@ const Navbar = () => {
                   isScrolled 
                     ? 'logo-gradient'
                     : 'text-white'
-                }`}>Vcube Pro</span>
+                }`}>Vcube</span>
               </div>
             </a>
           </div>
